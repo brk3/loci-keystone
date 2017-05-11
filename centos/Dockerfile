@@ -1,3 +1,4 @@
+FROM openstackloci/requirements as requirements
 FROM centos:7
 
 ENV PROJECT=keystone
@@ -9,6 +10,7 @@ ARG SCRIPTS_REF=master
 ARG OVERRIDE=override
 
 ADD $OVERRIDE /
+COPY --from=requirements /root/packages /tmp/packages
 
 RUN set -x \
     && yum upgrade -y \
